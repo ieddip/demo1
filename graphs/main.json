@@ -89,22 +89,22 @@
                 "height": 72
             }
         },
-        "camera1|mqtt-consumer_bhbud": {
-            "component": "camera1|mqtt-consumer",
+        "server|mqtt-consumer_vb6ix": {
+            "component": "server|mqtt-consumer",
             "metadata": {
-                "label": "camera1|mqtt-consumer",
-                "x": 180,
-                "y": 432,
+                "label": "server|mqtt-consumer",
+                "x": 108,
+                "y": 504,
                 "width": 72,
                 "height": 72
             }
         },
-        "camera|file-watcher_72ufc": {
+        "camera|file-watcher_kzrdv": {
             "component": "camera|file-watcher",
             "metadata": {
                 "label": "camera|file-watcher",
-                "x": 216,
-                "y": 180,
+                "x": 144,
+                "y": 252,
                 "width": 72,
                 "height": 72
             }
@@ -181,7 +181,7 @@
         },
         {
             "src": {
-                "process": "camera1|mqtt-consumer_bhbud",
+                "process": "server|mqtt-consumer_vb6ix",
                 "port": "out"
             },
             "tgt": {
@@ -192,7 +192,7 @@
         },
         {
             "src": {
-                "process": "camera|file-watcher_72ufc",
+                "process": "camera|file-watcher_kzrdv",
                 "port": "out"
             },
             "tgt": {
@@ -209,23 +209,23 @@
             }
         },
         {
-            "data": "{\"dir\": \"D:\\ieddip-cam-1\"}",
-            "tgt": {
-                "process": "camera|file-watcher_72ufc",
-                "port": "config"
-            }
-        },
-        {
-            "data": "{\"path\": \"tcp://52.18.18.202:1883\", \"topic\": \"camera1\"} ",
-            "tgt": {
-                "process": "camera|mqtt-publisher_tqgdu",
-                "port": "config"
-            }
-        },
-        {
             "data": "{\"path\": \"tcp://52.18.18.202:1883\", \"topics\": {\"camera\": 0}}",
             "tgt": {
-                "process": "camera1|mqtt-consumer_bhbud",
+                "process": "server|mqtt-consumer_vb6ix",
+                "port": "config"
+            }
+        },
+        {
+            "data": "{\"dir\": \"D:/ieddip-cam-1/\"}",
+            "tgt": {
+                "process": "camera|file-watcher_kzrdv",
+                "port": "config"
+            }
+        },
+        {
+            "data": "{\"path\": \"tcp://52.18.18.202:1883\", \"topic\": \"camera\"} ",
+            "tgt": {
+                "process": "camera|mqtt-publisher_tqgdu",
                 "port": "config"
             }
         }
