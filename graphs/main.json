@@ -59,21 +59,11 @@
                 "height": 72
             }
         },
-        "server|mqtt-consumer_5vcdu": {
-            "component": "server|mqtt-consumer",
-            "metadata": {
-                "label": "server|mqtt-consumer",
-                "x": 180,
-                "y": 432,
-                "width": 72,
-                "height": 72
-            }
-        },
         "server|deserializer_e3hb8": {
             "component": "server|deserializer",
             "metadata": {
                 "label": "server|deserializer",
-                "x": 432,
+                "x": 324,
                 "y": 468,
                 "width": 72,
                 "height": 72
@@ -93,18 +83,28 @@
             "component": "server|image->couch-doc-converter",
             "metadata": {
                 "label": "server|image->couch-doc-converter",
-                "x": 684,
+                "x": 504,
                 "y": 504,
                 "width": 72,
                 "height": 72
             }
         },
-        "camera|file-watcher_4uv8f": {
+        "camera1|mqtt-consumer_bhbud": {
+            "component": "camera1|mqtt-consumer",
+            "metadata": {
+                "label": "camera1|mqtt-consumer",
+                "x": 180,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "camera|file-watcher_72ufc": {
             "component": "camera|file-watcher",
             "metadata": {
                 "label": "camera|file-watcher",
-                "x": 180,
-                "y": 252,
+                "x": 216,
+                "y": 180,
                 "width": 72,
                 "height": 72
             }
@@ -159,17 +159,6 @@
         },
         {
             "src": {
-                "process": "server|mqtt-consumer_5vcdu",
-                "port": "out"
-            },
-            "tgt": {
-                "process": "server|deserializer_e3hb8",
-                "port": "in"
-            },
-            "metadata": {}
-        },
-        {
-            "src": {
                 "process": "server|deserializer_e3hb8",
                 "port": "out"
             },
@@ -192,7 +181,18 @@
         },
         {
             "src": {
-                "process": "camera|file-watcher_4uv8f",
+                "process": "camera1|mqtt-consumer_bhbud",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "server|deserializer_e3hb8",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "camera|file-watcher_72ufc",
                 "port": "out"
             },
             "tgt": {
@@ -200,13 +200,6 @@
                 "port": "in"
             },
             "metadata": {}
-        },
-        {
-            "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topic\": \"camera1\"} ",
-            "tgt": {
-                "process": "camera|mqtt-publisher_tqgdu",
-                "port": "config"
-            }
         },
         {
             "data": "{\"endpoint\": \"http://127.0.0.1:5984/camera1\"}",
@@ -218,14 +211,21 @@
         {
             "data": "{\"dir\": \"D:\\ieddip-cam-1\"}",
             "tgt": {
-                "process": "camera|file-watcher_4uv8f",
+                "process": "camera|file-watcher_72ufc",
                 "port": "config"
             }
         },
         {
-            "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topics\": {\"camera1\", 0}}",
+            "data": "{\"path\": \"tcp://52.18.18.202:1883\", \"topic\": \"camera1\"} ",
             "tgt": {
-                "process": "server|mqtt-consumer_5vcdu",
+                "process": "camera|mqtt-publisher_tqgdu",
+                "port": "config"
+            }
+        },
+        {
+            "data": "{\"path\": \"tcp://52.18.18.202:1883\", \"topics\": {\"camera\": 0}}",
+            "tgt": {
+                "process": "camera1|mqtt-consumer_bhbud",
                 "port": "config"
             }
         }
