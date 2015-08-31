@@ -9,16 +9,6 @@
     "outports": {},
     "groups": [],
     "processes": {
-        "camera|file-watcher_ag996": {
-            "component": "camera|file-watcher",
-            "metadata": {
-                "label": "camera|file-watcher",
-                "x": 216,
-                "y": 216,
-                "width": 72,
-                "height": 72
-            }
-        },
         "camera|image-loader_jic6i": {
             "component": "camera|image-loader",
             "metadata": {
@@ -93,25 +83,34 @@
             "component": "server|couch-putter",
             "metadata": {
                 "label": "server|couch-putter",
-                "x": 1152,
+                "x": 900,
                 "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "server|image->couch-doc-converter_orevl": {
+            "component": "server|image->couch-doc-converter",
+            "metadata": {
+                "label": "server|image->couch-doc-converter",
+                "x": 684,
+                "y": 504,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "camera|file-watcher_4uv8f": {
+            "component": "camera|file-watcher",
+            "metadata": {
+                "label": "camera|file-watcher",
+                "x": 180,
+                "y": 252,
                 "width": 72,
                 "height": 72
             }
         }
     },
     "connections": [
-        {
-            "src": {
-                "process": "camera|file-watcher_ag996",
-                "port": "out"
-            },
-            "tgt": {
-                "process": "camera|image-loader_jic6i",
-                "port": "in"
-            },
-            "metadata": {}
-        },
         {
             "src": {
                 "process": "camera|image-loader_jic6i",
@@ -170,11 +169,37 @@
             "metadata": {}
         },
         {
-            "data": "{\"dir\": \"D:\\ieddip-cam-1\"}",
+            "src": {
+                "process": "server|deserializer_e3hb8",
+                "port": "out"
+            },
             "tgt": {
-                "process": "camera|file-watcher_ag996",
-                "port": "config"
-            }
+                "process": "server|image->couch-doc-converter_orevl",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "server|image->couch-doc-converter_orevl",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "server|couch-putter_n8zj9",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "camera|file-watcher_4uv8f",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "camera|image-loader_jic6i",
+                "port": "in"
+            },
+            "metadata": {}
         },
         {
             "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topic\": \"camera1\"} ",
@@ -184,16 +209,23 @@
             }
         },
         {
-            "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topics\" {\"camera1\", 0}}",
+            "data": "{\"endpoint\": \"http://127.0.0.1:5984/camera1\"}",
             "tgt": {
-                "process": "server|mqtt-consumer_5vcdu",
+                "process": "server|couch-putter_n8zj9",
                 "port": "config"
             }
         },
         {
-            "data": "{\"endpoint\": \"http://127.0.0.1:5984\"}",
+            "data": "{\"dir\": \"D:\\ieddip-cam-1\"}",
             "tgt": {
-                "process": "server|couch-putter_n8zj9",
+                "process": "camera|file-watcher_4uv8f",
+                "port": "config"
+            }
+        },
+        {
+            "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topics\": {\"camera1\", 0}}",
+            "tgt": {
+                "process": "server|mqtt-consumer_5vcdu",
                 "port": "config"
             }
         }
