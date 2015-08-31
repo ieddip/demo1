@@ -68,6 +68,36 @@
                 "width": 72,
                 "height": 72
             }
+        },
+        "server|mqtt-consumer_5vcdu": {
+            "component": "server|mqtt-consumer",
+            "metadata": {
+                "label": "server|mqtt-consumer",
+                "x": 180,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "server|deserializer_e3hb8": {
+            "component": "server|deserializer",
+            "metadata": {
+                "label": "server|deserializer",
+                "x": 432,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "server|couch-putter_n8zj9": {
+            "component": "server|couch-putter",
+            "metadata": {
+                "label": "server|couch-putter",
+                "x": 1152,
+                "y": 468,
+                "width": 72,
+                "height": 72
+            }
         }
     },
     "connections": [
@@ -129,6 +159,17 @@
             "metadata": {}
         },
         {
+            "src": {
+                "process": "server|mqtt-consumer_5vcdu",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "server|deserializer_e3hb8",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
             "data": "{\"dir\": \"D:\\ieddip-cam-1\"}",
             "tgt": {
                 "process": "camera|file-watcher_ag996",
@@ -139,6 +180,20 @@
             "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topic\": \"camera1\"} ",
             "tgt": {
                 "process": "camera|mqtt-publisher_tqgdu",
+                "port": "config"
+            }
+        },
+        {
+            "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topics\" {\"camera1\", 0}}",
+            "tgt": {
+                "process": "server|mqtt-consumer_5vcdu",
+                "port": "config"
+            }
+        },
+        {
+            "data": "{\"endpoint\": \"http://127.0.0.1:5984\"}",
+            "tgt": {
+                "process": "server|couch-putter_n8zj9",
                 "port": "config"
             }
         }
