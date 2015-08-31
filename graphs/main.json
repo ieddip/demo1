@@ -1,0 +1,146 @@
+{
+    "properties": {
+        "name": "main",
+        "environment": {
+            "type": "protoflo"
+        }
+    },
+    "inports": {},
+    "outports": {},
+    "groups": [],
+    "processes": {
+        "camera|file-watcher_ag996": {
+            "component": "camera|file-watcher",
+            "metadata": {
+                "label": "camera|file-watcher",
+                "x": 216,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "camera|image-loader_jic6i": {
+            "component": "camera|image-loader",
+            "metadata": {
+                "label": "camera|image-loader",
+                "x": 432,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "camera|image->buffer-converter_tn68m": {
+            "component": "camera|image->buffer-converter",
+            "metadata": {
+                "label": "camera|image->buffer-converter",
+                "x": 648,
+                "y": 144,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "camera|buffer->base64-converter_d0z65": {
+            "component": "camera|buffer->base64-converter",
+            "metadata": {
+                "label": "camera|buffer->base64-converter",
+                "x": 756,
+                "y": 288,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "camera|serializer_hrqc2": {
+            "component": "camera|serializer",
+            "metadata": {
+                "label": "camera|serializer",
+                "x": 936,
+                "y": 252,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "camera|mqtt-publisher_tqgdu": {
+            "component": "camera|mqtt-publisher",
+            "metadata": {
+                "label": "camera|mqtt-publisher",
+                "x": 1116,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "camera|file-watcher_ag996",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "camera|image-loader_jic6i",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "camera|image-loader_jic6i",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "camera|image->buffer-converter_tn68m",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "camera|image->buffer-converter_tn68m",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "camera|buffer->base64-converter_d0z65",
+                "port": "in"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "camera|buffer->base64-converter_d0z65",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "camera|serializer_hrqc2",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "camera|serializer_hrqc2",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "camera|mqtt-publisher_tqgdu",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "data": "{\"dir\": \"D:\\ieddip-cam-1\"}",
+            "tgt": {
+                "process": "camera|file-watcher_ag996",
+                "port": "config"
+            }
+        },
+        {
+            "data": "{\"path\": \"tcp://52.16.162.55:1883\", \"topic\": \"camera1\"} ",
+            "tgt": {
+                "process": "camera|mqtt-publisher_tqgdu",
+                "port": "config"
+            }
+        }
+    ]
+}
