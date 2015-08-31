@@ -13,8 +13,8 @@
             "component": "camera|image-loader",
             "metadata": {
                 "label": "camera|image-loader",
-                "x": 432,
-                "y": 108,
+                "x": 396,
+                "y": 288,
                 "width": 72,
                 "height": 72
             }
@@ -23,8 +23,8 @@
             "component": "camera|image->buffer-converter",
             "metadata": {
                 "label": "camera|image->buffer-converter",
-                "x": 648,
-                "y": 144,
+                "x": 612,
+                "y": 72,
                 "width": 72,
                 "height": 72
             }
@@ -34,7 +34,7 @@
             "metadata": {
                 "label": "camera|buffer->base64-converter",
                 "x": 756,
-                "y": 288,
+                "y": 216,
                 "width": 72,
                 "height": 72
             }
@@ -44,7 +44,7 @@
             "metadata": {
                 "label": "camera|serializer",
                 "x": 936,
-                "y": 252,
+                "y": 72,
                 "width": 72,
                 "height": 72
             }
@@ -54,7 +54,7 @@
             "metadata": {
                 "label": "camera|mqtt-publisher",
                 "x": 1116,
-                "y": 216,
+                "y": 144,
                 "width": 72,
                 "height": 72
             }
@@ -103,8 +103,8 @@
             "component": "camera|file-watcher",
             "metadata": {
                 "label": "camera|file-watcher",
-                "x": 144,
-                "y": 252,
+                "x": 216,
+                "y": 180,
                 "width": 72,
                 "height": 72
             }
